@@ -1,0 +1,6 @@
+#@KlopsruBot
+TELEGRAM_CHAT_COLLECTION = 'telegram_chats'
+TELEGRAM_BOT_TOKEN = ENV['TELEGRAM_BOT_TOKEN']
+SECRET = ENV['SECRET']
+TELEGRAM_SEND_MESSAGE_URL = "https://api.telegram.org/bot#{TELEGRAM_BOT_TOKEN}/sendMessage"
+REDIS_TELEGRAM_CHAT_COLLECTION = 'telegram_chats'
