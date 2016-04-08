@@ -4,8 +4,8 @@ class SubscriptionManager
 
   attr_accessor :redis, :collection_name
 
-  def initialize(collection_name)
-    @redis = Redis.new
+  def initialize(redis, collection_name)
+    @redis = redis
     @collection_name = collection_name
   end
 

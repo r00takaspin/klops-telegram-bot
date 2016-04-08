@@ -47,7 +47,9 @@ start_message = %{
 → Listening for commands
 }
 
-subscription_manager = SubscriptionManager.new(REDIS_TELEGRAM_CHAT_COLLECTION)
+$redis = Redis.new(host: ENV["REDIS_PORT_6379_TCP_ADDR"], port: ENV["REDIS_PORT_6379_TCP_PORT"])
+
+subscription_manager = SubscriptionManager.new($redis,REDIS_TELEGRAM_CHAT_COLLECTION)
 
 Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |bot|
   puts start_message
