@@ -4,7 +4,7 @@
 * docker
 * docker-compose
 
-**Запуск**
+**Запуск**:
 `docker-compose up`
 
 
