@@ -1,5 +1,7 @@
 FROM ruby:2.3.0
-COPY ./ /web_app
-WORKDIR /web_app
+COPY ./ /app
+ADD Gemfile /app
+ADD Gemfile.lock /app
+WORKDIR /app
 RUN bundle install
-CMD ruby ./web.rb -o 0.0.0.0
+CMD ruby ./web.rb

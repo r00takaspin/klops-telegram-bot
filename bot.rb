@@ -59,7 +59,7 @@ Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |b
     bot.logger.info("→ #{message.text} from #{message.chat.first_name} #{message.chat.last_name} (##{message.chat.id})")
 
     case message.text
-    when '/start'
+    when /\/start*./
       bot.api.send_message(chat_id: message.chat.id, text: welcome_message)
     when '/help'
       bot.api.send_message(chat_id: message.chat.id, text: welcome_message)
