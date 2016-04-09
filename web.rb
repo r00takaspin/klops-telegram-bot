@@ -22,6 +22,6 @@ post '/register_message' do
     end
 
   else
-    halt 'You are not authorized to register messages' unless SECRET != secret
+    halt 'You are not authorized to register messages'
   end
 end
