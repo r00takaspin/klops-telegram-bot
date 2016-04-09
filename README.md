@@ -1,12 +1,14 @@
 # Telegram бот для сайта klops.ru
 
-### Запуск бота:
-`TELEGRAM_BOT_TOKEN=xxx SECRET=yyy ruby web.rb`
+**Требования**:
+* docker
+* docker-compose
 
-### Запуск сервиса, отвечающего за рассылку сообщений:
-`TELEGRAM_BOT_TOKEN=xxx ruby bot.rb`
+**Запуск**
+`docker-compose up`
 
-### Список комманд:
+
+**Список комманд**:
 *  /start - начать общение с ботом
 *  /help - список комманд
 *  /news - список последних новостей
