@@ -1,0 +1,17 @@
+bot:
+  build: .
+  links:
+   - redis
+  command: bundle exec ruby ./bot.rb
+  env_file: .env
+
+web:
+  build: .
+  ports:
+    - "4567:4567"
+  command: bundle exec ruby ./web.rb
+  links:
+    - redis
+  env_file: .env
+redis:
+  image: redis
