@@ -4,14 +4,16 @@ bot:
    - redis
   command: bundle exec ruby ./bot.rb
   env_file: .env
-
+  restart: always
 web:
   build: .
   ports:
     - "4567:4567"
   command: bundle exec ruby ./web.rb
+  restart: always
   links:
     - redis
   env_file: .env
 redis:
   image: redis
+  restart: always

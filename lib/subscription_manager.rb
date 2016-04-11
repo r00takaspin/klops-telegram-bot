@@ -16,4 +16,8 @@ class SubscriptionManager
   def unsubscribe(chat_id)
     @redis.srem(@collection_name,chat_id)
   end
+
+  def subscribed?(chat_id)
+    @redis.sismember(@collection_name, chat_id)
+  end
 end
