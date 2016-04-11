@@ -87,7 +87,7 @@ Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |b
         bot.api.send_message(chat_id: message.chat.id, text: 'Я вас подписал рассылку новостей, не более трех в день, честное робо-слово',reply_markup: answers)
       elsif Menu::COMMAND_SYNONYMS.invert[message.text]=='/news' || message.text == '/news'
         bot.api.send_message(chat_id: message.chat.id, text: 'Cписок последних новостей: ',reply_markup: answers)
-        send_popular(bot,message)
+        send_news(bot,message)
       elsif Menu::COMMAND_SYNONYMS.invert[message.text]=='/popular' || message.text == '/popular'
         bot.api.send_message(chat_id: message.chat.id, text: 'Популярные новости за сутки',reply_markup: answers)
         send_popular(bot,message)
