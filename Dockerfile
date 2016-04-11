@@ -4,4 +4,3 @@ ADD Gemfile /app
 ADD Gemfile.lock /app
 WORKDIR /app
 RUN bundle install
-CMD ruby ./web.rb
