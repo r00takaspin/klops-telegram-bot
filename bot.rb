@@ -2,6 +2,7 @@
 require 'telegram/bot'
 require 'redis'
 require './config'
+require 'byebug'
 
 Dir["./lib/*.rb"].each {|file| require file }
 
@@ -47,20 +48,6 @@ start_message = %{
 → Listening for commands
 }
 
-COMMAND_SYNONYMS = {
-  '/start' => 'Меню',
-  '/news' => 'Новости',
-  '/popular' => 'Популярное',
-  '/subscribe' => 'Подписка на новости',
-  '/unsubscribe' => 'Отписаться',
-  '/stop' => 'Попращатсья'
-}
-
-MENU = [
-  [COMMAND_SYNONYMS['/start'],COMMAND_SYNONYMS['/news'], COMMAND_SYNONYMS['/popular']],
-  [COMMAND_SYNONYMS['/subscribe'], COMMAND_SYNONYMS['/unsubscribe']],
-  [COMMAND_SYNONYMS['/stop']]
-]
 
 $redis = Redis.new(host: ENV["REDIS_PORT_6379_TCP_ADDR"], port: ENV["REDIS_PORT_6379_TCP_PORT"])
 
@@ -68,7 +55,6 @@ subscription_manager = SubscriptionManager.new($redis,REDIS_TELEGRAM_CHAT_COLLEC
 
 Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |bot|
   puts start_message
-
 
   bot.listen do |message|
 
@@ -78,7 +64,7 @@ Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |b
 
     answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: menu.answers, one_time_keyboard: true)
 
-    if Menu::COMMAND_SYNONYMS.invert.key?(message.text) || Menu::COMMAND_SYNONYMS.keys.include?(message.text)
+    if Menu::COMMAND_SYNONYMS.invert.key?(message.text) || Menu::COMMAND_SYNONYMS.keys.include?(message.text) || message.text.start_with?('/start')
       if Menu::COMMAND_SYNONYMS.invert[message.text]=='/start' || message.text.start_with?('/start')
         subscription_manager.subscribe(message.chat.id)
         menu.switch_subscription
