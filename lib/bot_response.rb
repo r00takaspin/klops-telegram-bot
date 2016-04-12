@@ -22,7 +22,7 @@ class BotResponse
   end
 
   def send!
-    if BotMenu::COMMAND_SYNONYMS.invert.key?(@message.text) || BotMenu::COMMAND_SYNONYMS.keys.include?(@message.text) || @message.text.start_with?('/start')
+    if message_in_command_list?
       if command_is? '/start'
         send_welcome_message
       elsif command_is? '/news'
@@ -35,13 +35,22 @@ class BotResponse
         unsubscribe
       elsif command_is? '/stop'
         byebye
-      else
-        bot.api.send_message(chat_id: chat_id, text: 'Нипонятно',reply_markup: @answers)
       end
+    else
+      @bot.api.send_message(chat_id: chat_id, text: 'Нипонятно',reply_markup: @answers)
     end
+
   end
 
   private
+
+  def message_in_command_list?
+    BotMenu::COMMAND_SYNONYMS.invert.key?(@message.text) || BotMenu::COMMAND_SYNONYMS.keys.include?(@message.text) || @message.text.start_with?('/start')
+  end
+
+  def command_is?(cmd)
+    BotMenu::COMMAND_SYNONYMS.invert[@message.text]==cmd || @message.text.start_with?(cmd)
+  end
 
   def chat_id
     @message.chat.id
@@ -85,11 +94,6 @@ class BotResponse
     kb = Telegram::Bot::Types::ReplyKeyboardHide.new(hide_keyboard: true)
     @subscription_manager.unsubscribe(chat_id)
     @bot.api.send_message(chat_id: chat_id, text: "До свидания, #{@message.from.first_name}", reply_markup: kb)
-  end
-
-  private
-  def command_is?(cmd)
-    BotMenu::COMMAND_SYNONYMS.invert[@message.text]==cmd || @message.text.start_with?(cmd)
   end
 
 end
