@@ -1,0 +1,27 @@
+<html>
+<head>
+  <title>Отправить сообщение в Telegram</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Разослать сообщение</h1>
+        <%if params[:message]%>
+            <code><%params[:message]%></code>
+        <%end%>
+        <form action="/register_message" method="POST">
+          <label for="exampleMessage">Сообщение</label>
+          <textarea class="u-full-width" placeholder="Тест сообщения" id="exampleMessage"></textarea>
+          <div class="row">
+            <div class="columns">
+              <label for="exampleEmailInput">URL</label>
+              <input class="u-full-width" type="url" placeholder="http://klops.ru/" id="exampleEmailInput">
+            </div>
+          </div>
+          <input type="hidden" value="<%=ENV['SECRET']%>" name="secret" />
+          <input type="hidden" name="where" value="form">
+          <input class="button-primary" type="submit" value="Отправить" >
+        </form>
+    </div>
+</body>
+</html>

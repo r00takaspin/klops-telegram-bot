@@ -6,6 +6,7 @@ gem 'telegram-bot-ruby'
 gem 'redis'
 gem 'sinatra'
 gem 'httparty'
+gem 'sinatra-basic-auth'
 
 group :development do
   gem 'byebug'
