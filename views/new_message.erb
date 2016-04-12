@@ -11,11 +11,11 @@
         <%end%>
         <form action="/register_message" method="POST">
           <label for="exampleMessage">Сообщение</label>
-          <textarea class="u-full-width" placeholder="Тест сообщения" id="exampleMessage"></textarea>
+          <textarea class="u-full-width" placeholder="Тест сообщения" name="title" ></textarea>
           <div class="row">
             <div class="columns">
               <label for="exampleEmailInput">URL</label>
-              <input class="u-full-width" type="url" placeholder="http://klops.ru/" id="exampleEmailInput">
+              <input class="u-full-width" type="url" name="url" placeholder="http://klops.ru/">
             </div>
           </div>
           <input type="hidden" value="<%=ENV['SECRET']%>" name="secret" />
