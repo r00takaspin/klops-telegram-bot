@@ -3,4 +3,4 @@ COPY ./ /app
 ADD Gemfile /app
 ADD Gemfile.lock /app
 WORKDIR /app
-RUN bundle install
+RUN bundle install --without development test

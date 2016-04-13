@@ -2,7 +2,6 @@
 require 'telegram/bot'
 require 'redis'
 require './config'
-require 'byebug'
 Dir["./lib/**/*.rb"].each {|file| require file }
 
 
