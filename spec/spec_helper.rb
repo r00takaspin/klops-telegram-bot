@@ -1,5 +1,6 @@
 require 'json'
 require 'fakeredis/rspec'
+require 'byebug'
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -10,5 +11,4 @@ RSpec.configure do |config|
   end
 end
 
-Dir['./lib/*.rb'].each {|file| require file }
-Dir['./lib/commands/*.rb'].each {|file| require file }
+Dir['./lib/**/*.rb'].each {|file| require file }

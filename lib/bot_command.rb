@@ -6,7 +6,7 @@ class BotCommand
     @bot = bot
     @chat_id = chat_id
     @subscription_manager = subscription_manager
-    @menu = BotMenu.new(subscription_manager, chat_id)
+    @menu = MainMenu.new
     @answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: @menu.answers, one_time_keyboard: true)
   end
 

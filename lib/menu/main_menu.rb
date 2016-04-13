@@ -1,6 +1,6 @@
-class BotMenu
+class MainMenu
 
-  attr_accessor :subscription_manager,:chat_id, :answers
+  attr_accessor :answers
 
   COMMAND_SYNONYMS = {
     '/start' => 'Меню',
@@ -8,7 +8,7 @@ class BotMenu
     '/popular' => 'Популярное',
     '/subscribe' => 'Подписка на новости',
     '/unsubscribe' => 'Отписаться',
-    '/stop' => 'Попращатсья'
+    '/stop' => 'Попращаться'
   }
 
   MENU = [
@@ -16,9 +16,7 @@ class BotMenu
     [COMMAND_SYNONYMS['/stop']]
   ]
 
-  def initialize(subscription_manager, chat_id)
-    @subscription_manager = subscription_manager
-    @chat_id = chat_id
+  def initialize
     @answers = MENU.clone
   end
 end
