@@ -15,9 +15,6 @@ class BotCommand
     raise StandardError('not implemented')
   end
 
-  def name
-    self.class
-  end
 
   def switch_subscription
     set_menu_subscription
