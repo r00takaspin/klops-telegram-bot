@@ -15,23 +15,22 @@ class CommandFactory
     @message = message
     if message_in_command_list?
       if command_is? '/start'
-        return StartCommand.new(bot, chat_id, subscription_manager)
+        StartCommand.new(bot, chat_id, subscription_manager)
       elsif command_is? '/news'
-        return NewsCommand.new(bot, chat_id, subscription_manager)
+        NewsCommand.new(bot, chat_id, subscription_manager)
       elsif command_is? '/popular'
-        return PopularCommand.new(bot, chat_id, subscription_manager)
+        PopularCommand.new(bot, chat_id, subscription_manager)
       elsif command_is? '/subscribe'
-        return SubscribeCommand.new(bot, chat_id, subscription_manager)
+        SubscribeCommand.new(bot, chat_id, subscription_manager)
       elsif command_is? '/unsubscribe'
-        return UnsubscribeCommand.new(bot, chat_id, subscription_manager)
+        UnsubscribeCommand.new(bot, chat_id, subscription_manager)
       elsif command_is? '/stop'
-        return StopCommand.new(bot,chat_id, subscription_manager)
+        StopCommand.new(bot,chat_id, subscription_manager)
       else
-        raise NotImplementedError('not implemented yet')
+        raise Exception.new('Very strange command')
       end
     else
-      raise NotImplementedError('not implemented yet')
-      # @bot.api.send_message(chat_id: chat_id, text: 'Нипонятно',reply_markup: @answers)
+      UnknownCommand.new(bot,chat_id, subscription_manager)
     end
   end
 
