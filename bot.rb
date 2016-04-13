@@ -31,9 +31,5 @@ Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |b
     factory = CommandFactory.new
     command = factory.get_command(message.text, message.chat.id, bot, subscription_manager)
     command.execute
-
-    # response = BotResponse.new(bot, subscription_manager, message)
-    # bot.logger.info("→ #{message.text} from #{message.chat.first_name} #{message.chat.last_name} (##{message.chat.id})")
-    # response.send!
   end
 end
