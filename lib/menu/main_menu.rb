@@ -12,8 +12,8 @@ class MainMenu
   }
 
   MENU = [
-    [COMMAND_SYNONYMS['/start'],COMMAND_SYNONYMS['/news'], COMMAND_SYNONYMS['/popular']],
-    [COMMAND_SYNONYMS['/stop']]
+    [COMMAND_SYNONYMS['/news'], COMMAND_SYNONYMS['/popular']],
+    [COMMAND_SYNONYMS['/unsubscribe'], COMMAND_SYNONYMS['/stop']]
   ]
 
   def initialize
