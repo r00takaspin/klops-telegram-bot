@@ -12,8 +12,8 @@ class StartCommand < BotCommand
 }
 
   def execute
-    @subscription_manager.subscribe(chat_id)
-    @bot.api.send_message(chat_id: chat_id, text: WELCOME_MESSAGE)
-    @bot.api.send_message(chat_id: chat_id, text: 'Я вас подписал рассылку новостей, не более трех в день, честное робо-слово',reply_markup: @answers)
+    @subscription_manager.subscribe(@chat_id)
+    @bot.api.send_message(chat_id: @chat_id, text: WELCOME_MESSAGE)
+    @bot.api.send_message(chat_id: @chat_id, text: 'Я вас подписал рассылку новостей, не более трех в день, честное робо-слово', reply_markup: @answers)
   end
 end

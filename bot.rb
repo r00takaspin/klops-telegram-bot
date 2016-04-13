@@ -4,6 +4,7 @@ require 'redis'
 require './config'
 require 'byebug'
 Dir["./lib/*.rb"].each {|file| require file }
+Dir["./lib/commands/*.rb"].each {|file| require file }
 
 
 start_message = %{
@@ -27,7 +28,9 @@ Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |b
 
   bot.listen do |message|
 
-    command = CommandFactory.new(bot, subscription_manager, message.chat.id, message.text)
+    factory = CommandFactory.new
+    command = factory.get_command(message.text, message.chat.id, bot, subscription_manager)
+    command.execute
 
     # response = BotResponse.new(bot, subscription_manager, message)
     # bot.logger.info("→ #{message.text} from #{message.chat.first_name} #{message.chat.last_name} (##{message.chat.id})")
