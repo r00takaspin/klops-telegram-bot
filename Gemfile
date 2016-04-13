@@ -8,6 +8,8 @@ gem 'sinatra'
 gem 'httparty'
 gem 'sinatra-basic-auth'
 
-group :development do
+group :development, :test do
   gem 'byebug'
+  gem 'rspec'
+  gem 'fakeredis'
 end

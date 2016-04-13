@@ -13,7 +13,7 @@ class BotResponse
 
   attr_accessor :bot, :subscription_manager, :menu, :answers
 
-  def initialize(bot, subscription_manager,message)
+  def initialize(bot, subscription_manager, message)
     @bot = bot
     @message = message
     @subscription_manager = subscription_manager
@@ -39,7 +39,6 @@ class BotResponse
     else
       @bot.api.send_message(chat_id: chat_id, text: 'Нипонятно',reply_markup: @answers)
     end
-
   end
 
   private
@@ -49,7 +48,7 @@ class BotResponse
   end
 
   def command_is?(cmd)
-    BotMenu::COMMAND_SYNONYMS.invert[@message.text]==cmd || @message.text.start_with?(cmd)
+    BotMenu::COMMAND_SYNONYMS.invert[@message.text] == cmd || @message.text.start_with?(cmd)
   end
 
   def chat_id
@@ -57,8 +56,10 @@ class BotResponse
   end
 
   def send_news
-    if NewsSource.news.any?
-      NewsSource.news.each do |item|
+    source = KlopsNewsFeed.new
+    source.fetch!
+    if source.items.any?
+      source.items.each do |item|
         @bot.api.send_message(chat_id: chat_id, text: 'Cписок последних новостей: ',reply_markup: answers)
         @bot.api.send_message(chat_id: chat_id, text: "#{item[0]} #{item[1]}" )
       end
@@ -66,8 +67,10 @@ class BotResponse
   end
 
   def send_popular
-    if NewsSource.popular.any?
-      NewsSource.popular.each do |item|
+    source = KlopsPopularNews.new
+    source.fetch!
+    if source.items.any?
+      source.items.each do |item|
         @bot.api.send_message(chat_id: chat_id, text: 'Популярные новости за сутки',reply_markup: answers)
         @bot.api.send_message(chat_id: chat_id, text: "#{item[0]} #{item[1]}" )
       end
