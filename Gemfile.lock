@@ -83,6 +83,7 @@ DEPENDENCIES
   httparty
   redis
   rspec
+  rspec-mocks
   sinatra
   sinatra-basic-auth
   telegram-bot-ruby

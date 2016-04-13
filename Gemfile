@@ -11,5 +11,6 @@ gem 'sinatra-basic-auth'
 group :development, :test do
   gem 'byebug'
   gem 'rspec'
+  gem 'rspec-mocks'
   gem 'fakeredis'
 end
