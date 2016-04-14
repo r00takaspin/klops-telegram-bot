@@ -9,7 +9,7 @@ class PopularCommand < BotCommand
 
   def execute
     @menu = PopularMenu.new
-    @answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: @menu.answers, one_time_keyboard: true)
+    @answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: @menu.answers, one_time_keyboard: true, resize_keyboard: true)
     source = KlopsPopularNews.new(@period)
     source.fetch!
     if source.items.any?

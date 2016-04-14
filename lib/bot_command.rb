@@ -8,13 +8,12 @@ class BotCommand
     @subscription_manager = subscription_manager
     @menu = MainMenu.new
     switch_subscription
-    @answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: @menu_answers, one_time_keyboard: true)
+    @answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: @menu_answers, one_time_keyboard: true, resize_keyboard: true)
   end
 
   def execute
     raise StandardError('not implemented')
   end
-
 
   def switch_subscription
     set_menu_subscription
