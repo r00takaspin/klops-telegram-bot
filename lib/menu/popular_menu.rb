@@ -6,7 +6,7 @@ class PopularMenu
     '/popular two_days' => 'За день',
     '/popular four_days' => 'За три дня',
     '/popular week' => 'За неделю',
-    '/start' => 'Меню' #TODO: FIX THIS
+    '/start' => 'Назад'
   }
 
   MENU = [

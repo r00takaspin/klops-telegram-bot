@@ -16,7 +16,7 @@ describe CommandFactory do
     end
 
     it 'humanized: should return start command' do
-      command = factory.get_command('Меню', bot, some_chat_id, subscription_manager)
+      command = factory.get_command('Информация', bot, some_chat_id, subscription_manager)
       expect(command).to be_a_kind_of(StartCommand)
     end
   end

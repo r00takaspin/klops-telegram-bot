@@ -23,9 +23,9 @@ class BotCommand
   def set_menu_subscription
     @menu_answers = @menu.answers
     if @subscription_manager.subscribed?(@chat_id)
-      @menu_answers[1] = [MainMenu::COMMAND_SYNONYMS['/unsubscribe'], MainMenu::COMMAND_SYNONYMS['/stop']]
+      @menu_answers[1] = [MainMenu::COMMAND_SYNONYMS['/unsubscribe'], MainMenu::COMMAND_SYNONYMS['/start']]
     else
-      @menu_answers[1] = [MainMenu::COMMAND_SYNONYMS['/subscribe'], MainMenu::COMMAND_SYNONYMS['/stop']]
+      @menu_answers[1] = [MainMenu::COMMAND_SYNONYMS['/subscribe'], MainMenu::COMMAND_SYNONYMS['/start']]
     end
   end
 end
