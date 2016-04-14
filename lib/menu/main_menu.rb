@@ -6,7 +6,7 @@ class MainMenu
     '/start' => 'Информация',
     '/news' => 'Новости',
     '/popular' => 'Популярное',
-    '/subscribe' => 'Подписка на новости',
+    '/subscribe' => 'Подписаться',
     '/unsubscribe' => 'Отписаться',
   }
 
