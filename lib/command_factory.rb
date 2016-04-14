@@ -1,5 +1,3 @@
-require 'byebug'
-
 class CommandFactory
 
   attr_accessor :message, :command
