@@ -54,7 +54,7 @@ describe CommandFactory do
       expect(command).to be_a_kind_of(PopularCommand)
     end
 
-    it 'humanize: wek' do
+    it 'humanize: week' do
       command = factory.get_command('За неделю', bot, some_chat_id, subscription_manager)
       expect(command).to be_a_kind_of(PopularCommand)
     end
@@ -76,8 +76,8 @@ describe CommandFactory do
   end
 
   describe 'stop' do
-    it 'humanize: should return stop command' do
-      command = factory.get_command('Попращаться', bot, some_chat_id, subscription_manager)
+    it 'should return stop command' do
+      command = factory.get_command('/stop', bot, some_chat_id, subscription_manager)
       expect(command).to be_a_kind_of(StopCommand)
     end
   end

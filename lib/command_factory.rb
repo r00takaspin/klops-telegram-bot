@@ -1,3 +1,5 @@
+require 'byebug'
+
 class CommandFactory
 
   attr_accessor :message, :command
@@ -10,10 +12,6 @@ class CommandFactory
     '/unsubscribe' => 'Отписаться',
     '/stop' => 'Попращатсья'
   }
-
-  def initialize
-    @merged_menues = MainMenu::COMMAND_SYNONYMS.merge(PopularMenu::COMMAND_SYNONYMS)
-  end
 
   def get_command(message, chat_id, bot, subscription_manager)
     @message = message
@@ -55,13 +53,15 @@ class CommandFactory
   end
 
   def is_subcommand_of?(cmd)
-    @command.start_with?(cmd) && @command!=cmd
+    @command.start_with?(cmd) && @command != cmd
   end
 
   def normalize_command!
     if is_human_command?
-      if @merged_menues.values.include?(@message)
-        @command = @merged_menues.invert[@message]
+      if MainMenu::COMMAND_SYNONYMS.values.include?(@message)
+        @command = MainMenu::COMMAND_SYNONYMS.invert[@message]
+      elsif PopularMenu::COMMAND_SYNONYMS.values.include?(@message)
+        @command = PopularMenu::COMMAND_SYNONYMS.invert[@message]
       end
     else
       @command = @message
