@@ -1,5 +1,5 @@
-#encoding: utf-8
 require 'telegram/bot'
+require 'telegram/bot/botan'
 require 'redis'
 require './config'
 Dir["./lib/**/*.rb"].each {|file| require file }
@@ -24,10 +24,13 @@ subscription_manager = SubscriptionManager.new($redis)
 Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |bot|
   puts start_message
 
+  bot.enable_botan!(ENV['BOTAN_TOKEN'])
+
   bot.listen do |message|
 
     factory = CommandFactory.new
     command = factory.get_command(message.text, message.chat.id, bot, subscription_manager)
     command.execute
+    bot.track(command.name, message.from.id, type_of_chat: message.chat.class.name)
   end
 end
