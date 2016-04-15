@@ -13,7 +13,7 @@ class KlopsPopularNews
   def fetch!
     json = JSON.parse make_request
     json_items = json['news']
-    @items = json_items[0..NEWS_LIMIT - 1].map {|item| [item['title'], item['url']] }
+    @items = json_items[0..NEWS_LIMIT - 1].map {|item| [item['title'], item['url']] }.reverse
   end
 
   private

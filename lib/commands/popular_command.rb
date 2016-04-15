@@ -23,9 +23,9 @@ class PopularCommand < BotCommand
   private
   def desc_msg
     case @period.to_sym
-      when :two_days
+      when :one_day
         'Самые популярные новости за день'
-      when :four_days
+      when :three_days
         'Самые популярные новости за три дня'
       when :week
         'Самые популярные новости за неделю'

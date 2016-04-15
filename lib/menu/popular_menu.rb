@@ -3,8 +3,8 @@ class PopularMenu
   attr_accessor :answers
 
   COMMAND_SYNONYMS = {
-    '/popular two_days' => 'За день',
-    '/popular four_days' => 'За три дня',
+    '/popular one_day' => 'За день',
+    '/popular three_days' => 'За три дня',
     '/popular week' => 'За неделю',
     '/start' => 'Назад'
   }
