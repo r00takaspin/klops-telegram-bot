@@ -8,6 +8,7 @@ class BotCommand
     @subscription_manager = subscription_manager
     @menu = MainMenu.new
     switch_subscription
+    @menu_answers = @menu.answers
     @answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: @menu_answers, one_time_keyboard: true, resize_keyboard: true)
   end
 

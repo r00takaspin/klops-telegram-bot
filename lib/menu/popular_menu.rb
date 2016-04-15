@@ -10,7 +10,7 @@ class PopularMenu
   }
 
   MENU = [
-    [COMMAND_SYNONYMS['/popular two_days'],COMMAND_SYNONYMS['/popular four_days'], COMMAND_SYNONYMS['/popular week']],
+    [COMMAND_SYNONYMS['/popular one_day'],COMMAND_SYNONYMS['/popular three_days'], COMMAND_SYNONYMS['/popular week']],
     [COMMAND_SYNONYMS['/start']]
   ]
 
