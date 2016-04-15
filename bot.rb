@@ -28,9 +28,13 @@ Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |b
 
   bot.listen do |message|
 
-    factory = CommandFactory.new
-    command = factory.get_command(message.text, message.chat.id, bot, subscription_manager)
-    command.execute
-    bot.track(command.class.name, message.from.id, type_of_chat: message.chat.class.name)
+    begin
+      factory = CommandFactory.new
+      command = factory.get_command(message.text, message.chat.id, bot, subscription_manager)
+      command.execute
+      bot.track(command.class.name, message.from.id, type_of_chat: message.chat.class.name)
+    rescue Telegram::Bot::Exceptions::ResponseError
+      bot.api.send_message(chat_id: message.chat.id, text: 'Технические проблемы ...')
+    end
   end
 end
