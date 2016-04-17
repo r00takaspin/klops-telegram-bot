@@ -43,7 +43,7 @@ class CommandFactory
 
   private
   def is_human_command?
-    !@message.start_with?('/')
+    @message && !@message.start_with?('/')
   end
 
   def get_params
