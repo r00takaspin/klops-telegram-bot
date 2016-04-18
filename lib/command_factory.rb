@@ -33,6 +33,8 @@ class CommandFactory
         UnsubscribeCommand.new(bot, chat_id, subscription_manager)
       elsif StopCommand.handles? @command
         StopCommand.new(bot, chat_id, subscription_manager)
+      else
+        UnknownCommand.new(bot, chat_id, subscription_manager)
       end
     else
       UnknownCommand.new(bot, chat_id, subscription_manager)
