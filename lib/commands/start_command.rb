@@ -19,4 +19,8 @@ class StartCommand < BotCommand
   def execute
     @bot.api.send_message(chat_id: @chat_id, text: WELCOME_MESSAGE, reply_markup: @answers)
   end
+
+  def self.handles?(command)
+    command == '/start' || command.start_with?('/start')
+  end
 end

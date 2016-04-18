@@ -20,6 +20,10 @@ class PopularCommand < BotCommand
     end
   end
 
+  def self.handles? (command)
+    command.start_with?('/popular') && command != '/popular'
+  end
+
   private
   def desc_msg
     case @period.to_sym

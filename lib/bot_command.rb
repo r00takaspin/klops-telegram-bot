@@ -16,6 +16,10 @@ class BotCommand
     raise StandardError('not implemented')
   end
 
+  def self.handles?
+    raise StandardError('not implemented')
+  end
+
   def switch_subscription
     set_menu_subscription
   end

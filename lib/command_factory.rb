@@ -17,23 +17,21 @@ class CommandFactory
     normalize_command!
 
     if @command
-      if command_is?('/start') || @command.start_with?('/start')
+      if StartCommand.handles? @command
         StartCommand.new(bot, chat_id, subscription_manager)
-      elsif command_is? '/news'
-        NewsCommand.new(bot, chat_id, subscription_manager)
-      elsif command_is?('/popular') || @command.start_with?('/popular')
-        if is_subcommand_of?('/popular')
-          params = get_params
-          period = params.first
-          PopularCommand.new(period, bot, chat_id, subscription_manager)
-        else
+      elsif NewsCommand.handles? @command
+          NewsCommand.new(bot, chat_id, subscription_manager)
+      elsif PopularMenuCommand.handles? @command
           PopularMenuCommand.new(bot, chat_id, subscription_manager)
-        end
-      elsif command_is? '/subscribe'
+      elsif PopularCommand.handles? @command
+        params = get_command_params
+        period = params.first
+        PopularCommand.new(period, bot, chat_id, subscription_manager)
+      elsif SubscribeCommand.handles? @command
         SubscribeCommand.new(bot, chat_id, subscription_manager)
-      elsif command_is? '/unsubscribe'
+      elsif UnsubscribeCommand.handles? @command
         UnsubscribeCommand.new(bot, chat_id, subscription_manager)
-      elsif command_is? '/stop'
+      elsif StopCommand.handles? @command
         StopCommand.new(bot, chat_id, subscription_manager)
       end
     else
@@ -46,12 +44,8 @@ class CommandFactory
     @message && !@message.start_with?('/')
   end
 
-  def get_params
+  def get_command_params
     @command.split(' ').drop(1)
-  end
-
-  def is_subcommand_of?(cmd)
-    @command.start_with?(cmd) && @command != cmd
   end
 
   def normalize_command!

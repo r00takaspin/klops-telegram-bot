@@ -8,4 +8,8 @@ class SubscribeCommand < BotCommand
     @answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: @menu_answers, one_time_keyboard: true, resize_keyboard: true)
     @bot.api.send_message(chat_id: @chat_id, text: SUBSCRIPTION_MESSAGE,reply_markup: @answers)
   end
+
+  def self.handles?(command)
+    '/subscribe' == command
+  end
 end

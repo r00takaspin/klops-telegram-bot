@@ -9,4 +9,8 @@ class NewsCommand < BotCommand
       end
     end
   end
+
+  def self.handles?(command)
+    '/news' == command
+  end
 end
