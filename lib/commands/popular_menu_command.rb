@@ -1,3 +1,4 @@
+# Shows popular submenu
 class PopularMenuCommand < BotCommand
   def execute
     @menu = PopularMenu.new

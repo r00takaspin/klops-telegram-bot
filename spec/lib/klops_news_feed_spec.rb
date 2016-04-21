@@ -16,7 +16,7 @@ describe KlopsNewsFeed do
   end
 
   context 'passing number of required news' do
-    subject { KlopsNewsFeed.new(1)}
+    subject { KlopsNewsFeed.new(1) }
 
     it 'should return only one news' do
       subject.fetch!
@@ -25,7 +25,7 @@ describe KlopsNewsFeed do
   end
 
   context 'it should not fetch error with huge number in argument' do
-    subject { KlopsNewsFeed.new(999999999999) }
+    subject { KlopsNewsFeed.new(999) }
 
     it 'should return only one news' do
       subject.fetch!

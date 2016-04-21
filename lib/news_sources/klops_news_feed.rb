@@ -1,11 +1,10 @@
 require 'rss'
-
+# Fetches last news from klops.ru RSS feed
 class KlopsNewsFeed
+  KLOPS_RSS_FEED = 'https://klops.ru/rss.rss'.freeze
+  NEWS_LIMIT = 5
 
   attr_accessor :limit, :items
-
-  KLOPS_RSS_FEED = 'https://klops.ru/rss.rss'
-  NEWS_LIMIT = 5
 
   def initialize(limit = false)
     @limit = limit ? limit : NEWS_LIMIT
@@ -18,8 +17,9 @@ class KlopsNewsFeed
   end
 
   private
+
   def make_request
     response = HTTParty.get KLOPS_RSS_FEED
-    return response.body
+    response.body
   end
 end

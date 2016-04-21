@@ -1,9 +1,9 @@
 require 'fakeredis'
 
 describe SubscriptionManager do
-  subject { SubscriptionManager.new(Redis.new)}
+  subject { SubscriptionManager.new(Redis.new) }
 
-  let (:some_chat_id) { 'some_chat_id' }
+  let(:some_chat_id) { 'some_chat_id' }
 
   context 'subscribed?' do
     it 'chat_id is not in database' do

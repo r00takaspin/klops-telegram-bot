@@ -2,8 +2,7 @@ require 'telegram/bot'
 require 'telegram/bot/botan'
 require 'redis'
 require './config'
-Dir["./lib/**/*.rb"].each {|file| require file }
-
+Dir['./lib/**/*.rb'].each { |file| require file }
 
 start_message = %{
 #  ██╗  ██╗██╗      ██████╗ ██████╗ ███████╗
@@ -28,13 +27,13 @@ Telegram::Bot::Client.run(TELEGRAM_BOT_TOKEN, logger: Logger.new($stdout)) do |b
 
   bot.listen do |message|
 
-    # begin
+    begin
       factory = CommandFactory.new
       command = factory.get_command(message.text, message.chat.id, bot, subscription_manager)
       command.execute
       bot.track(command.class.name, message.from.id, type_of_chat: message.chat.class.name)
-    # rescue Telegram::Bot::Exceptions::ResponseError
-    #   bot.logger.info('Bot has been baned')
-    # end
+    rescue Telegram::Bot::Exceptions::ResponseError
+      bot.logger.info('Bot has been baned')
+    end
   end
 end

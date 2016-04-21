@@ -1,7 +1,5 @@
+# Resolves right command by use message
 class CommandFactory
-
-  attr_accessor :message, :command
-
   COMMAND_SYNONYMS = {
     '/start' => 'Меню',
     '/news' => 'Новости',
@@ -9,7 +7,8 @@ class CommandFactory
     '/subscribe' => 'Подписка на новости',
     '/unsubscribe' => 'Отписаться',
     '/stop' => 'Попращатсья'
-  }
+  }.freeze
+  attr_accessor :message, :command
 
   def get_command(message, chat_id, bot, subscription_manager)
     @message = message
@@ -20,11 +19,11 @@ class CommandFactory
       if StartCommand.handles? @command
         StartCommand.new(bot, chat_id, subscription_manager)
       elsif NewsCommand.handles? @command
-          NewsCommand.new(bot, chat_id, subscription_manager)
+        NewsCommand.new(bot, chat_id, subscription_manager)
       elsif PopularMenuCommand.handles? @command
-          PopularMenuCommand.new(bot, chat_id, subscription_manager)
+        PopularMenuCommand.new(bot, chat_id, subscription_manager)
       elsif PopularCommand.handles? @command
-        params = get_command_params
+        params = command_params
         period = params.first
         PopularCommand.new(period, bot, chat_id, subscription_manager)
       elsif SubscribeCommand.handles? @command
@@ -42,16 +41,17 @@ class CommandFactory
   end
 
   private
-  def is_human_command?
-    @message && !@message.start_with?('/')
+
+  def human_command?
+    @message && !@message.start_with?('/') ? true : false
   end
 
-  def get_command_params
+  def command_params
     @command.split(' ').drop(1)
   end
 
   def normalize_command!
-    if is_human_command?
+    if human_command?
       if MainMenu::COMMAND_SYNONYMS.values.include?(@message)
         @command = MainMenu::COMMAND_SYNONYMS.invert[@message]
       elsif PopularMenu::COMMAND_SYNONYMS.values.include?(@message)

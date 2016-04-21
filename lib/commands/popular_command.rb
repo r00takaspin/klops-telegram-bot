@@ -1,5 +1,5 @@
+# Show popular news for given period
 class PopularCommand < BotCommand
-
   attr_accessor :period
 
   def initialize(period, *args)
@@ -15,26 +15,27 @@ class PopularCommand < BotCommand
     @bot.api.send_message(chat_id: @chat_id, text: desc_msg)
     if source.items.any?
       source.items.each do |item|
-        @bot.api.send_message(chat_id: @chat_id, text: "#{item[0]} #{item[1]}",reply_markup: @answers)
+        @bot.api.send_message(chat_id: @chat_id, text: "#{item[0]} #{item[1]}", reply_markup: @answers)
       end
     end
   end
 
-  def self.handles? (command)
+  def self.handles?(command)
     command.start_with?('/popular') && command != '/popular'
   end
 
   private
+
   def desc_msg
     case @period.to_sym
-      when :one_day
-        'Самые популярные новости за день'
-      when :three_days
-        'Самые популярные новости за три дня'
-      when :week
-        'Самые популярные новости за неделю'
-      else
-        'Самые популярные новости'
+    when :one_day
+      'Самые популярные новости за день'
+    when :three_days
+      'Самые популярные новости за три дня'
+    when :week
+      'Самые популярные новости за неделю'
+    else
+      'Самые популярные новости'
     end
   end
 end

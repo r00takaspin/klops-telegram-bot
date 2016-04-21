@@ -1,3 +1,4 @@
+# Start messaging with user
 class StartCommand < BotCommand
 
   WELCOME_MESSAGE = %{
@@ -14,7 +15,7 @@ class StartCommand < BotCommand
 \/subscribe - подписаться на важные новости (не более 3х за день)
 \/unsubscribe -  отписаться от важных новостей
 \/stop - закончить общение с ботом
-}
+}.freeze
 
   def execute
     @bot.api.send_message(chat_id: @chat_id, text: WELCOME_MESSAGE, reply_markup: @answers)
