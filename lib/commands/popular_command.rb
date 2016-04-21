@@ -3,18 +3,18 @@ class PopularCommand < BotCommand
   attr_accessor :period
 
   def initialize(period, *args)
-    @period = period
     super *args
+    @period = period
+    @menu = PopularMenu.new
+    @answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: @menu.answers, one_time_keyboard: true, resize_keyboard: true)
+    @source = KlopsPopularNews.new(@period)
   end
 
   def execute
-    @menu = PopularMenu.new
-    @answers = Telegram::Bot::Types::ReplyKeyboardMarkup.new(keyboard: @menu.answers, one_time_keyboard: true, resize_keyboard: true)
-    source = KlopsPopularNews.new(@period)
-    source.fetch!
+    @source.fetch!
     @bot.api.send_message(chat_id: @chat_id, text: desc_msg)
-    if source.items.any?
-      source.items.each do |item|
+    if @source.items.any?
+      @source.items.each do |item|
         @bot.api.send_message(chat_id: @chat_id, text: "#{item[0]} #{item[1]}", reply_markup: @answers)
       end
     end

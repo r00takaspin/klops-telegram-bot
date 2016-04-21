@@ -20,7 +20,6 @@ protect do
 end
 
 post '/register_message' do
-
   secret = params[:secret]
   if SECRET == secret
     title = params[:title]

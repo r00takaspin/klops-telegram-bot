@@ -1,6 +1,5 @@
 # Start messaging with user
 class StartCommand < BotCommand
-
   WELCOME_MESSAGE = %{
 Вас приветствует официальный бот Клопс.Ru!
 
