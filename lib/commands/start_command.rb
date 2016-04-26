@@ -1,5 +1,5 @@
+# Start messaging with user
 class StartCommand < BotCommand
-
   WELCOME_MESSAGE = %{
 Вас приветствует официальный бот Клопс.Ru!
 
@@ -14,9 +14,11 @@ class StartCommand < BotCommand
 \/subscribe - подписаться на важные новости (не более 3х за день)
 \/unsubscribe -  отписаться от важных новостей
 \/stop - закончить общение с ботом
-}
+}.freeze
 
   def execute
+    @subscription_manager.subscribe(@chat_id)
+    switch_subscription
     @bot.api.send_message(chat_id: @chat_id, text: WELCOME_MESSAGE, reply_markup: @answers)
   end
 

@@ -1,5 +1,5 @@
+# Abstract class used by applied commands
 class BotCommand
-
   attr_reader :menu, :answers, :chat_id, :answers
 
   def initialize(bot, chat_id, subscription_manager)
@@ -25,8 +25,9 @@ class BotCommand
   end
 
   private
+
   def set_menu_subscription
-    @menu_answers = @menu.answers
+    @menu_answers = @menu.answers.clone
     if @subscription_manager.subscribed?(@chat_id)
       @menu_answers[1] = [MainMenu::COMMAND_SYNONYMS['/unsubscribe'], MainMenu::COMMAND_SYNONYMS['/start']]
     else

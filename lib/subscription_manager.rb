@@ -1,6 +1,6 @@
+# Manages subscription for news updates
 class SubscriptionManager
-
-  TELEGRAM_CHAT_COLLECTION = 'telegram_chats'
+  TELEGRAM_CHAT_COLLECTION = 'telegram_chats'.freeze
 
   attr_accessor :redis, :collection_name
 

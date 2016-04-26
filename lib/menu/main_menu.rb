@@ -1,19 +1,24 @@
+# Main menu class
 class MainMenu
-
-  attr_accessor :answers
-
   COMMAND_SYNONYMS = {
     '/start' => 'Информация',
     '/news' => 'Новости',
     '/popular' => 'Популярное',
     '/subscribe' => 'Подписаться',
-    '/unsubscribe' => 'Отписаться',
-  }
+    '/unsubscribe' => 'Отписаться'
+  }.freeze
 
   MENU = [
-    [COMMAND_SYNONYMS['/news'], COMMAND_SYNONYMS['/popular']],
-    [COMMAND_SYNONYMS['/unsubscribe'], COMMAND_SYNONYMS['/start']]
+    [
+      COMMAND_SYNONYMS['/news'],
+      COMMAND_SYNONYMS['/popular']],
+    [
+      COMMAND_SYNONYMS['/unsubscribe'],
+      COMMAND_SYNONYMS['/start']
+    ]
   ]
+
+  attr_accessor :answers
 
   def initialize
     @answers = MENU.clone

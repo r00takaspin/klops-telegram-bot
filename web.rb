@@ -20,7 +20,6 @@ protect do
 end
 
 post '/register_message' do
-
   secret = params[:secret]
   if SECRET == secret
     title = params[:title]
@@ -28,7 +27,7 @@ post '/register_message' do
 
     chat_ids = $redis.smembers(TELEGRAM_CHAT_COLLECTION)
     chat_ids.each do |chat_id|
-      options = {chat_id: chat_id, text: "#{title} #{url}"}
+      options = { chat_id: chat_id, text: "#{title} #{url}" }
       HTTParty.post(TELEGRAM_SEND_MESSAGE_URL, body: options)
     end
     'ok'
