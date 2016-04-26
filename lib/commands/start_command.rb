@@ -17,6 +17,8 @@ class StartCommand < BotCommand
 }.freeze
 
   def execute
+    @subscription_manager.subscribe(@chat_id)
+    switch_subscription
     @bot.api.send_message(chat_id: @chat_id, text: WELCOME_MESSAGE, reply_markup: @answers)
   end
 
